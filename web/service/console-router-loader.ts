@@ -1,37 +1,41 @@
 import type { AnyContractRouter } from '@orpc/contract'
 import { contractLoaders } from '@dify/contracts/api/console/orpc.gen'
 
-const wrapConsoleContract = (segment: string, contract: unknown) => ({ [segment]: contract }) as AnyContractRouter
+const generatedConsoleContractLoaders: Partial<Record<string, () => Promise<AnyContractRouter>>> =
+  contractLoaders
 
 async function loadGeneratedConsoleContract(segment: string) {
-  const loader = contractLoaders[segment as keyof typeof contractLoaders]
-  if (!loader)
-    return null
+  const loader = generatedConsoleContractLoaders[segment]
+  if (!loader) return null
 
-  return loader() as Promise<AnyContractRouter>
+  return loader()
 }
 
-const customConsoleContractLoaders: Record<string, () => Promise<AnyContractRouter>> = {
-  enterprise: () => import('@dify/contracts/enterprise/orpc.gen').then(({ contract }) => wrapConsoleContract('enterprise', contract)),
-  explore: () => import('@/contract/console/explore').then(({ exploreRouterContract }) => wrapConsoleContract('explore', exploreRouterContract)),
-  modelProviders: () =>
-    import('@/contract/console/model-providers').then(({ modelProvidersRouterContract }) => wrapConsoleContract('modelProviders', modelProvidersRouterContract)),
-  plugins: () => import('@/contract/console/plugins').then(({ pluginsRouterContract }) => wrapConsoleContract('plugins', pluginsRouterContract)),
-  rbacAccessConfig: () =>
-    import('@/contract/console/access-control').then(({ rbacAccessConfigContract }) => wrapConsoleContract('rbacAccessConfig', rbacAccessConfigContract)),
-  snippets: () => import('@/contract/console/snippets').then(({ snippetsRouterContract }) => wrapConsoleContract('snippets', snippetsRouterContract)),
-  triggers: () => import('@/contract/console/trigger').then(({ triggersRouterContract }) => wrapConsoleContract('triggers', triggersRouterContract)),
-  trialApps: () => import('@/contract/console/try-app').then(({ trialAppsRouterContract }) => wrapConsoleContract('trialApps', trialAppsRouterContract)),
+async function loadEnterpriseContract(): Promise<AnyContractRouter> {
+  const [{ contract: enterpriseContract }, { contract: appDeployContract }] = await Promise.all([
+    import('@dify/contracts/enterprise/orpc.gen'),
+    import('@dify/contracts/enterprise-app-deploy/orpc.gen'),
+  ])
+
+  return {
+    enterprise: {
+      ...enterpriseContract,
+      appDeploy: appDeployContract,
+    },
+  }
+}
+
+async function loadKnowledgeFsContract(): Promise<AnyContractRouter> {
+  const { contract } = await import('@dify/contracts/knowledge-fs/orpc.gen')
+  return { knowledgeFs: contract }
 }
 
 export async function loadConsoleContractForSegment(segment: string) {
-  const customContractLoader = customConsoleContractLoaders[segment]
-  if (customContractLoader)
-    return customContractLoader()
+  if (segment === 'enterprise') return loadEnterpriseContract()
+  if (segment === 'knowledgeFs') return loadKnowledgeFsContract()
 
   const generatedContract = await loadGeneratedConsoleContract(segment)
-  if (generatedContract)
-    return generatedContract
+  if (generatedContract) return generatedContract
 
   throw new Error(`Console contract segment "${segment}" is not configured.`)
 }

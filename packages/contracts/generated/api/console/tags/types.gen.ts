@@ -4,16 +4,18 @@ export type ClientOptions = {
   baseUrl: `${string}://${string}/console/api` | (string & {})
 }
 
+export type TagListResponse = Array<TagResponse>
+
+export type TagBasePayload = {
+  name: string
+  type: TagType
+}
+
 export type TagResponse = {
   binding_count?: string | null
   id: string
   name: string
   type?: string | null
-}
-
-export type TagBasePayload = {
-  name: string
-  type: TagType
 }
 
 export type TagUpdateRequestPayload = {
@@ -25,15 +27,15 @@ export type TagType = 'app' | 'knowledge' | 'snippet'
 export type GetTagsData = {
   body?: never
   path?: never
-  query?: {
+  query: {
     keyword?: string
-    type?: '' | 'app' | 'knowledge' | 'snippet'
+    type: 'app' | 'knowledge' | 'snippet'
   }
   url: '/tags'
 }
 
 export type GetTagsResponses = {
-  200: Array<TagResponse>
+  200: TagListResponse
 }
 
 export type GetTagsResponse = GetTagsResponses[keyof GetTagsResponses]

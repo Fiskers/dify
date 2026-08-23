@@ -13,6 +13,11 @@ export const zTagResponse = z.object({
 })
 
 /**
+ * TagListResponse
+ */
+export const zTagListResponse = z.array(zTagResponse)
+
+/**
  * TagUpdateRequestPayload
  */
 export const zTagUpdateRequestPayload = z.object({
@@ -36,13 +41,13 @@ export const zTagBasePayload = z.object({
 
 export const zGetTagsQuery = z.object({
   keyword: z.string().optional(),
-  type: z.enum(['', 'app', 'knowledge', 'snippet']).optional().default(''),
+  type: z.enum(['app', 'knowledge', 'snippet']),
 })
 
 /**
  * Success
  */
-export const zGetTagsResponse = z.array(zTagResponse)
+export const zGetTagsResponse = zTagListResponse
 
 export const zPostTagsBody = zTagBasePayload
 

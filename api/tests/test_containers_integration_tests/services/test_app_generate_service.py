@@ -8,6 +8,7 @@ from faker import Faker
 from sqlalchemy.orm import Session
 
 from core.app.entities.app_invoke_entities import InvokeFrom
+from enums import DeploymentEdition
 from models import App
 from models.enums import EndUserType
 from models.model import EndUser
@@ -106,14 +107,14 @@ class TestAppGenerateService:
             mock_account_feature_service.get_system_features.return_value.is_allow_register = True
 
             # Setup dify_config mock returns
-            mock_dify_config.BILLING_ENABLED = False
+            mock_dify_config.DEPLOYMENT_EDITION = DeploymentEdition.COMMUNITY
             mock_dify_config.APP_MAX_ACTIVE_REQUESTS = 100
             mock_dify_config.APP_DEFAULT_ACTIVE_REQUESTS = 100
             mock_dify_config.APP_DAILY_RATE_LIMIT = 1000
 
-            mock_quota_dify_config.BILLING_ENABLED = False
+            mock_quota_dify_config.DEPLOYMENT_EDITION = DeploymentEdition.COMMUNITY
 
-            mock_global_dify_config.BILLING_ENABLED = False
+            mock_global_dify_config.DEPLOYMENT_EDITION = DeploymentEdition.COMMUNITY
             mock_global_dify_config.APP_MAX_ACTIVE_REQUESTS = 100
             mock_global_dify_config.APP_DAILY_RATE_LIMIT = 1000
             mock_global_dify_config.HOSTED_POOL_CREDITS = 1000
@@ -187,7 +188,7 @@ class TestAppGenerateService:
         )
 
         app_service = AppService()
-        app = app_service.create_app(tenant.id, app_args, account)
+        app = app_service.create_app(tenant.id, app_args, account, session=db_session_with_containers)
 
         return app, account
 
@@ -234,7 +235,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -262,7 +268,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -288,7 +299,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -314,7 +330,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -342,7 +363,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -374,7 +400,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -401,7 +432,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.DEBUGGER, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.DEBUGGER,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -426,7 +462,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=False
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=False,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -463,34 +504,44 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=end_user, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=end_user,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
         assert result == ["test_response"]
 
-    def test_generate_with_billing_enabled_sandbox_plan(
+    def test_generate_in_cloud_sandbox_plan(
         self, db_session_with_containers: Session, mock_external_service_dependencies
     ):
         """
-        Test generation with billing enabled and sandbox plan.
+        Test generation in the Cloud edition with a sandbox plan.
         """
         fake = Faker()
         app, account = self._create_test_app_and_account(
             db_session_with_containers, mock_external_service_dependencies, mode="completion"
         )
 
-        # Set BILLING_ENABLED to True for this test
-        mock_external_service_dependencies["dify_config"].BILLING_ENABLED = True
-        mock_external_service_dependencies["quota_dify_config"].BILLING_ENABLED = True
-        mock_external_service_dependencies["global_dify_config"].BILLING_ENABLED = True
+        # Billing services are available in the Cloud deployment edition.
+        mock_external_service_dependencies["dify_config"].DEPLOYMENT_EDITION = DeploymentEdition.CLOUD
+        mock_external_service_dependencies["quota_dify_config"].DEPLOYMENT_EDITION = DeploymentEdition.CLOUD
+        mock_external_service_dependencies["global_dify_config"].DEPLOYMENT_EDITION = DeploymentEdition.CLOUD
 
         # Setup test arguments
         args = {"inputs": {"query": fake.text(max_nb_chars=50)}, "response_mode": "streaming"}
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -524,7 +575,12 @@ class TestAppGenerateService:
         # StatementError (from EnumText validation during autoflush)
         with pytest.raises((ValueError, sa.exc.StatementError)):
             AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=InvokeFrom.SERVICE_API,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
     def test_generate_with_workflow_id_format_error(
@@ -548,7 +604,12 @@ class TestAppGenerateService:
         # Execute the method under test and expect WorkflowIdFormatError
         with pytest.raises(WorkflowIdFormatError) as exc_info:
             AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=InvokeFrom.SERVICE_API,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify error message
@@ -582,7 +643,12 @@ class TestAppGenerateService:
         # Execute the method under test and expect WorkflowNotFoundError
         with pytest.raises(WorkflowNotFoundError) as exc_info:
             AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=InvokeFrom.SERVICE_API,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify error message
@@ -608,7 +674,12 @@ class TestAppGenerateService:
         # Execute the method under test and expect ValueError
         with pytest.raises(ValueError) as exc_info:
             AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=InvokeFrom.DEBUGGER, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=InvokeFrom.DEBUGGER,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify error message
@@ -634,7 +705,12 @@ class TestAppGenerateService:
         # Execute the method under test and expect ValueError
         with pytest.raises(ValueError) as exc_info:
             AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=InvokeFrom.SERVICE_API,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify error message
@@ -656,7 +732,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate_single_iteration(
-            app_model=app, user=account, node_id=node_id, args=args, streaming=True
+            app_model=app,
+            user=account,
+            node_id=node_id,
+            args=args,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -683,7 +764,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate_single_iteration(
-            app_model=app, user=account, node_id=node_id, args=args, streaming=True
+            app_model=app,
+            user=account,
+            node_id=node_id,
+            args=args,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -711,7 +797,12 @@ class TestAppGenerateService:
         # Execute the method under test and expect ValueError
         with pytest.raises(ValueError) as exc_info:
             AppGenerateService.generate_single_iteration(
-                app_model=app, user=account, node_id=node_id, args=args, streaming=True
+                app_model=app,
+                user=account,
+                node_id=node_id,
+                args=args,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify error message
@@ -733,7 +824,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate_single_loop(
-            app_model=app, user=account, node_id=node_id, args=args, streaming=True
+            app_model=app,
+            user=account,
+            node_id=node_id,
+            args=args,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -760,7 +856,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate_single_loop(
-            app_model=app, user=account, node_id=node_id, args=args, streaming=True
+            app_model=app,
+            user=account,
+            node_id=node_id,
+            args=args,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -786,7 +887,12 @@ class TestAppGenerateService:
         # Execute the method under test and expect ValueError
         with pytest.raises(ValueError) as exc_info:
             AppGenerateService.generate_single_loop(
-                app_model=app, user=account, node_id=node_id, args=args, streaming=True
+                app_model=app,
+                user=account,
+                node_id=node_id,
+                args=args,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify error message
@@ -807,7 +913,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate_more_like_this(
-            app_model=app, user=account, message_id=message_id, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            session=db_session_with_containers,
+            app_model=app,
+            user=account,
+            message_id=message_id,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
         )
 
         # Verify the result
@@ -847,7 +958,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate_more_like_this(
-            app_model=app, user=end_user, message_id=message_id, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            session=db_session_with_containers,
+            app_model=app,
+            user=end_user,
+            message_id=message_id,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
         )
 
         # Verify the result
@@ -936,7 +1052,12 @@ class TestAppGenerateService:
         # Execute the method under test and expect exception
         with pytest.raises(Exception) as exc_info:
             AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=InvokeFrom.SERVICE_API,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify exception message
@@ -964,7 +1085,12 @@ class TestAppGenerateService:
 
         # Execute the method under test
         result = AppGenerateService.generate(
-            app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+            app_model=app,
+            user=account,
+            args=args,
+            invoke_from=InvokeFrom.SERVICE_API,
+            streaming=True,
+            session=db_session_with_containers,
         )
 
         # Verify the result
@@ -999,7 +1125,12 @@ class TestAppGenerateService:
 
             # Execute the method under test
             result = AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=invoke_from, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=invoke_from,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
             # Verify the result
@@ -1037,7 +1168,12 @@ class TestAppGenerateService:
             mock_exec_params.new.return_value = mock_payload
 
             result = AppGenerateService.generate(
-                app_model=app, user=account, args=args, invoke_from=InvokeFrom.SERVICE_API, streaming=True
+                app_model=app,
+                user=account,
+                args=args,
+                invoke_from=InvokeFrom.SERVICE_API,
+                streaming=True,
+                session=db_session_with_containers,
             )
 
         # Verify the result
