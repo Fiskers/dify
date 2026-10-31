@@ -577,8 +577,8 @@ catalogs:
       specifier: 3.19.3
       version: 3.19.3
     undici:
-      specifier: 7.28.0
-      version: 7.28.0
+      specifier: 7.30.1
+      version: 7.30.1
     unist-util-visit:
       specifier: 5.1.0
       version: 5.1.0
@@ -713,7 +713,7 @@ importers:
         version: 1.0.8
       undici:
         specifier: 'catalog:'
-        version: 7.28.0
+        version: 7.30.1
       zod:
         specifier: 'catalog:'
         version: 4.4.3
@@ -823,7 +823,7 @@ importers:
         version: 6.0.3
       vite-plus:
         specifier: 'catalog:'
-        version: 0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
+        version: 0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/dev-proxy:
     dependencies:
@@ -9066,6 +9066,7 @@ packages:
   std-semver@1.0.8:
     resolution: {integrity: sha512-9SN0XIjBBXCT6ZXXVnScJN4KP2RyFg6B8sEoFlugVHMANysfaEni4LTWlvUQQ/R0wgZl1Ovt9KBQbzn21kHoZA==}
     engines: {node: '>=20.19.0'}
+    deprecated: No longer maintained. Try `verkit` instead
 
   stdin-discarder@0.3.2:
     resolution: {integrity: sha512-eCPu1qRxPVkl5605OTWF8Wz40b4Mf45NY5LQmVPQ599knfs5QhASUm9GbJ5BDMDOXgrnh0wyEdvzmL//YMlw0A==}
@@ -9430,6 +9431,10 @@ packages:
 
   undici@7.28.0:
     resolution: {integrity: sha512-cRZYrTDwWznlnRiPjggAGxZXanty6M8RV1ff8Wm4LWXBp7/IG8v5DnOm74DtUBp9OONpK75YlPnIjQqX0dBDtA==}
+    engines: {node: '>=20.18.1'}
+
+  undici@7.30.1:
+    resolution: {integrity: sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==}
     engines: {node: '>=20.18.1'}
 
   unicode-trie@2.0.0:
@@ -17853,31 +17858,6 @@ snapshots:
       '@oxfmt/binding-win32-x64-msvc': 0.55.0
       vite-plus: 0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
 
-  oxfmt@0.55.0(vite-plus@0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)):
-    dependencies:
-      tinypool: 2.1.0
-    optionalDependencies:
-      '@oxfmt/binding-android-arm-eabi': 0.55.0
-      '@oxfmt/binding-android-arm64': 0.55.0
-      '@oxfmt/binding-darwin-arm64': 0.55.0
-      '@oxfmt/binding-darwin-x64': 0.55.0
-      '@oxfmt/binding-freebsd-x64': 0.55.0
-      '@oxfmt/binding-linux-arm-gnueabihf': 0.55.0
-      '@oxfmt/binding-linux-arm-musleabihf': 0.55.0
-      '@oxfmt/binding-linux-arm64-gnu': 0.55.0
-      '@oxfmt/binding-linux-arm64-musl': 0.55.0
-      '@oxfmt/binding-linux-ppc64-gnu': 0.55.0
-      '@oxfmt/binding-linux-riscv64-gnu': 0.55.0
-      '@oxfmt/binding-linux-riscv64-musl': 0.55.0
-      '@oxfmt/binding-linux-s390x-gnu': 0.55.0
-      '@oxfmt/binding-linux-x64-gnu': 0.55.0
-      '@oxfmt/binding-linux-x64-musl': 0.55.0
-      '@oxfmt/binding-openharmony-arm64': 0.55.0
-      '@oxfmt/binding-win32-arm64-msvc': 0.55.0
-      '@oxfmt/binding-win32-ia32-msvc': 0.55.0
-      '@oxfmt/binding-win32-x64-msvc': 0.55.0
-      vite-plus: 0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
-
   oxfmt@0.55.0(vite-plus@0.2.1(@types/node@26.0.1)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)):
     dependencies:
       tinypool: 2.1.0
@@ -17935,30 +17915,6 @@ snapshots:
       '@oxlint/binding-win32-x64-msvc': 1.70.0
       oxlint-tsgolint: 0.23.0
       vite-plus: 0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
-
-  oxlint@1.70.0(oxlint-tsgolint@0.23.0)(vite-plus@0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)):
-    optionalDependencies:
-      '@oxlint/binding-android-arm-eabi': 1.70.0
-      '@oxlint/binding-android-arm64': 1.70.0
-      '@oxlint/binding-darwin-arm64': 1.70.0
-      '@oxlint/binding-darwin-x64': 1.70.0
-      '@oxlint/binding-freebsd-x64': 1.70.0
-      '@oxlint/binding-linux-arm-gnueabihf': 1.70.0
-      '@oxlint/binding-linux-arm-musleabihf': 1.70.0
-      '@oxlint/binding-linux-arm64-gnu': 1.70.0
-      '@oxlint/binding-linux-arm64-musl': 1.70.0
-      '@oxlint/binding-linux-ppc64-gnu': 1.70.0
-      '@oxlint/binding-linux-riscv64-gnu': 1.70.0
-      '@oxlint/binding-linux-riscv64-musl': 1.70.0
-      '@oxlint/binding-linux-s390x-gnu': 1.70.0
-      '@oxlint/binding-linux-x64-gnu': 1.70.0
-      '@oxlint/binding-linux-x64-musl': 1.70.0
-      '@oxlint/binding-openharmony-arm64': 1.70.0
-      '@oxlint/binding-win32-arm64-msvc': 1.70.0
-      '@oxlint/binding-win32-ia32-msvc': 1.70.0
-      '@oxlint/binding-win32-x64-msvc': 1.70.0
-      oxlint-tsgolint: 0.23.0
-      vite-plus: 0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
 
   oxlint@1.70.0(oxlint-tsgolint@0.23.0)(vite-plus@0.2.1(@types/node@26.0.1)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)):
     optionalDependencies:
@@ -19298,6 +19254,8 @@ snapshots:
 
   undici@7.28.0: {}
 
+  undici@7.30.1: {}
+
   unicode-trie@2.0.0:
     dependencies:
       pako: 0.2.9
@@ -19598,67 +19556,6 @@ snapshots:
       - vite
       - yaml
 
-  vite-plus@0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0):
-    dependencies:
-      '@oxc-project/types': 0.136.0
-      '@oxlint/plugins': 1.68.0
-      '@vitest/browser': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9)
-      '@vitest/browser-preview': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9)
-      '@vitest/expect': 4.1.9
-      '@vitest/mocker': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))
-      '@vitest/pretty-format': 4.1.9
-      '@vitest/runner': 4.1.9
-      '@vitest/snapshot': 4.1.9
-      '@vitest/spy': 4.1.9
-      '@vitest/utils': 4.1.9
-      '@voidzero-dev/vite-plus-core': 0.2.1(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)
-      oxfmt: 0.55.0(vite-plus@0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))
-      oxlint: 1.70.0(oxlint-tsgolint@0.23.0)(vite-plus@0.2.1(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))
-      oxlint-tsgolint: 0.23.0
-      vitest: 4.1.9(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/browser-preview@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(happy-dom@20.10.6)
-    optionalDependencies:
-      '@vitest/browser-playwright': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(playwright@1.61.1)(vitest@4.1.9)
-      '@voidzero-dev/vite-plus-darwin-arm64': 0.2.1
-      '@voidzero-dev/vite-plus-darwin-x64': 0.2.1
-      '@voidzero-dev/vite-plus-linux-arm64-gnu': 0.2.1
-      '@voidzero-dev/vite-plus-linux-arm64-musl': 0.2.1
-      '@voidzero-dev/vite-plus-linux-x64-gnu': 0.2.1
-      '@voidzero-dev/vite-plus-linux-x64-musl': 0.2.1
-      '@voidzero-dev/vite-plus-win32-arm64-msvc': 0.2.1
-      '@voidzero-dev/vite-plus-win32-x64-msvc': 0.2.1
-    transitivePeerDependencies:
-      - '@arethetypeswrong/core'
-      - '@edge-runtime/vm'
-      - '@opentelemetry/api'
-      - '@tsdown/css'
-      - '@tsdown/exe'
-      - '@types/node'
-      - '@vitejs/devtools'
-      - '@vitest/coverage-istanbul'
-      - '@vitest/coverage-v8'
-      - '@vitest/ui'
-      - bufferutil
-      - esbuild
-      - happy-dom
-      - jiti
-      - jsdom
-      - less
-      - msw
-      - publint
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - svelte
-      - terser
-      - tsx
-      - typescript
-      - unplugin-unused
-      - unrun
-      - utf-8-validate
-      - vite
-      - yaml
-
   vite-plus@0.2.1(@types/node@26.0.1)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(happy-dom@20.10.6)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0):
     dependencies:
       '@oxc-project/types': 0.136.0
@@ -19776,37 +19673,6 @@ snapshots:
       '@types/node': 25.9.4
       '@vitest/browser-playwright': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(playwright@1.61.1)(vitest@4.1.9)
       '@vitest/browser-preview': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9)
-      '@vitest/coverage-v8': 4.1.9(@vitest/browser@4.1.9)(vitest@4.1.9)
-      happy-dom: 20.10.6
-    transitivePeerDependencies:
-      - msw
-
-  vitest@4.1.9(@types/node@25.9.4)(@vitest/browser-playwright@4.1.9)(@vitest/browser-preview@4.1.9)(@vitest/coverage-v8@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(happy-dom@20.10.6):
-    dependencies:
-      '@vitest/expect': 4.1.9
-      '@vitest/mocker': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))
-      '@vitest/pretty-format': 4.1.9
-      '@vitest/runner': 4.1.9
-      '@vitest/snapshot': 4.1.9
-      '@vitest/spy': 4.1.9
-      '@vitest/utils': 4.1.9
-      es-module-lexer: 2.1.0
-      expect-type: 1.4.0
-      magic-string: 0.30.21
-      obug: 2.1.3
-      pathe: 2.0.3
-      picomatch: 4.0.4
-      std-env: 4.1.0
-      tinybench: 2.9.0
-      tinyexec: 1.2.4
-      tinyglobby: 0.2.17
-      tinyrainbow: 3.1.0
-      vite: '@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0)'
-      why-is-node-running: 2.3.0
-    optionalDependencies:
-      '@types/node': 25.9.4
-      '@vitest/browser-playwright': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(playwright@1.61.1)(vitest@4.1.9)
-      '@vitest/browser-preview': 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9)
       '@vitest/coverage-v8': 4.1.9(@vitest/browser@4.1.9)(vitest@4.1.9)
       happy-dom: 20.10.6
     transitivePeerDependencies:
@@ -20232,7 +20098,7 @@ time:
   tsx@4.22.4: '2026-05-31T12:22:19.330Z'
   typescript@6.0.3: '2026-04-16T23:38:27.905Z'
   uglify-js@3.19.3: '2024-08-29T13:49:01.316Z'
-  undici@7.28.0: '2026-06-15T15:51:12.886Z'
+  undici@7.30.1: '2026-10-15T14:18:31.283Z'
   unist-util-visit@5.1.0: '2026-01-22T19:02:58.977Z'
   use-context-selector@2.0.0: '2024-05-06T11:23:59.259Z'
   uuid@14.0.1: '2026-06-20T11:56:02.499Z'
